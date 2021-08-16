@@ -16,5 +16,10 @@ def contato():
 def usuarios():
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
+@app.route('/trabalhe-conosco')
+def trabalhe_conosco():
+    return render_template('trabalhe_conosco.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
