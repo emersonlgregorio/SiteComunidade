@@ -3,7 +3,13 @@
 {% block body %}
         <div class="container">
             <h1>Trabalhe Conosco</h1>
-            <h2>Página contato projeto web, envie suas duvidas para: duvida@duvida.com</h2>
+            <br>
+            <h4>Vagas disponíveis <a href="#"><p class="badge bg-success">Cadastre seu currículo</p></a></h4>
+            <br>
+            {% for vaga in vagas %}
+            <a href="#">{{ vaga }}</a>
+            <hr>
+            {% endfor %}
         </div>
 
 {% endblock %}
