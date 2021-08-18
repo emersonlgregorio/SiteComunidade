@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, flash, redirect
 from forms import FormLogin, FormCriarConta
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
@@ -7,6 +8,10 @@ lista_usuarios = ['Emerson', 'Francieli', 'João', 'Fulano', 'Morfeu']
 vagas = ['Auxiliar de Produção', "Mecânico de Maquinas Pesadas", 'Especialista de TI', 'Auxiliar Contábil']
 
 app.config['SECRET_KEY'] = 'c1444b3dc88d5bb19c4d917edb7d780d'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///crestani.db'
+
+database = SQLAlchemy(app)
+
 
 @app.route('/')
 def home():
