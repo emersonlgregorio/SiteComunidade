@@ -11,7 +11,19 @@
 </head>
 <body>
     {% include 'navbar.html' %}
+    <div class="container">
+        {% with mensagens = get_flashed_messages(with_categories=True) %}
+            {% if mensagens %}
+                {% for categoria, mensagem in mensagens %}
+                    <div class="alert alert-dismissible fade show {{ categoria }} mt-2">
+                        {{ mensagem }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
 
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
     {% block body %}
     {% endblock %}
 
