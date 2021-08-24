@@ -1,4 +1,4 @@
-from app import database
+from crestani import database
 from datetime import datetime
 
 
