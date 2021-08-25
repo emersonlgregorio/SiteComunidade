@@ -1,5 +1,5 @@
 from flask import render_template, url_for, redirect, request, flash
-from crestani import app, database
+from crestani import app, database, bcrypt
 from crestani.forms import FormCriarConta, FormLogin
 from crestani.models import Usuario
 
@@ -35,9 +35,10 @@ def login():
         return redirect(url_for('home'))
     if form_criarconta.validate_on_submit() and 'botao_submit_criarconta' in request.form:
         #criar o Usuario
+        senha_cript = bcrypt.generate_password_hash(form_criarconta.senha.data)
         usuario = Usuario(username=form_criarconta.username.data,
                           email=form_criarconta.email.data,
-                          senha=form_criarconta.senha.data)
+                          senha=senha_cript)
         #adicionar a sessão
         database.session.add(usuario)
         #commit a sessao
