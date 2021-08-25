@@ -1,6 +1,7 @@
 from flask import render_template, url_for, redirect, request, flash
-from crestani import app
+from crestani import app, database
 from crestani.forms import FormCriarConta, FormLogin
+from crestani.models import Usuario
 
 lista_usuarios = ['Emerson', 'Francieli', 'João', 'Fulano', 'Morfeu']
 vagas = ['Auxiliar de Produção', "Mecânico de Maquinas Pesadas", 'Especialista de TI', 'Auxiliar Contábil']
@@ -33,6 +34,14 @@ def login():
         flash(f'Login feito com sucesso no e-mail: {form_login.email.data}', 'alert-success')
         return redirect(url_for('home'))
     if form_criarconta.validate_on_submit() and 'botao_submit_criarconta' in request.form:
+        #criar o Usuario
+        usuario = Usuario(username=form_criarconta.username.data,
+                          email=form_criarconta.email.data,
+                          senha=form_criarconta.senha.data)
+        #adicionar a sessão
+        database.session.add(usuario)
+        #commit a sessao
+        database.session.commit()
         flash(f'Conta criada para o e-mail: {form_criarconta.email.data}', 'alert-success')
         return redirect(url_for('home'))
     return render_template('login.html', form_login=form_login, form_criarconta=form_criarconta)
