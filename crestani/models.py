@@ -1,8 +1,16 @@
-from crestani import database
+from crestani import database, login_manager
 from datetime import datetime
+from flask_login import UserMixin
 
 
-class Usuario(database.Model):
+@login_manager.user_loader
+def load_usuario(id_usuario):
+    # get encontra o registro pela Primary Key
+    return Usuario.query.get(int(id_usuario))
+
+
+#UsexMixin controla a sessão do usuário
+class Usuario(database.Model, UserMixin):
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String, nullable=False)
     email = database.Column(database.String, nullable=False, unique=True)
