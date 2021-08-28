@@ -2,10 +2,11 @@ from flask import render_template, url_for, redirect, request, flash
 from crestani import app, database, bcrypt
 from crestani.forms import FormCriarConta, FormLogin
 from crestani.models import Usuario
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 lista_usuarios = ['Emerson', 'Francieli', 'João', 'Fulano', 'Morfeu']
 vagas = ['Auxiliar de Produção', "Mecânico de Maquinas Pesadas", 'Especialista de TI', 'Auxiliar Contábil']
+
 
 @app.route('/')
 def home():
@@ -18,6 +19,7 @@ def contato():
 
 
 @app.route('/usuarios')
+@login_required
 def usuarios():
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
@@ -56,6 +58,7 @@ def login():
 
 
 @app.route('/sair')
+@login_required
 def sair():
     logout_user()
     flash(f'Logout feito com sucesso', 'alert-success')
@@ -63,10 +66,12 @@ def sair():
 
 
 @app.route('/perfil')
+@login_required
 def perfil():
     return render_template('perfil.html')
 
 
 @app.route('/post/criar')
+@login_required
 def criar_post():
     return render_template(('criarpost.html'))
