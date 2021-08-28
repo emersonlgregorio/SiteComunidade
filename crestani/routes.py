@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, request, flash
 from crestani import app, database, bcrypt
 from crestani.forms import FormCriarConta, FormLogin
 from crestani.models import Usuario
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user
 
 lista_usuarios = ['Emerson', 'Francieli', 'João', 'Fulano', 'Morfeu']
 vagas = ['Auxiliar de Produção', "Mecânico de Maquinas Pesadas", 'Especialista de TI', 'Auxiliar Contábil']
@@ -53,3 +53,20 @@ def login():
         flash(f'Conta criada para o e-mail: {form_criarconta.email.data}', 'alert-success')
         return redirect(url_for('home'))
     return render_template('login.html', form_login=form_login, form_criarconta=form_criarconta)
+
+
+@app.route('/sair')
+def sair():
+    logout_user()
+    flash(f'Logout feito com sucesso', 'alert-success')
+    return redirect(url_for('home'))
+
+
+@app.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
+
+
+@app.route('/post/criar')
+def criar_post():
+    return render_template(('criarpost.html'))

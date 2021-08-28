@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid container">
-    <a class="navbar-brand" href="{{ url_for('home') }}"><stron class="">AGROCRESTANI</stron></a>
+    <!-- <a class="navbar-brand" href="{{ url_for('home') }}"><stron class="">AGROCRESTANI</stron></a> -->
+    <a class="navbar-brand" href="{{ url_for('home') }}"><img src="{{url_for('static',filename = 'logo_crestani_4.png')}}" alt="AGROCRESTANI" width=130 height=18></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -17,12 +18,24 @@
         </li>
       </ul>
       <ul class="d-flex navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}">Criar Conta</a>
-        </li>
+        {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('criar_post') }}">Criar Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('perfil') }}">Meu Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sair') }}">Sair</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Criar Conta</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </div>
