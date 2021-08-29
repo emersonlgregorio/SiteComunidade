@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, request, flash
 from crestani import app, database, bcrypt
-from crestani.forms import FormCriarConta, FormLogin
+from crestani.forms import FormCriarConta, FormLogin, FormEditarPerfil
 from crestani.models import Usuario
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -80,3 +80,11 @@ def perfil():
 @login_required
 def criar_post():
     return render_template(('criarpost.html'))
+
+
+@app.route('/perfil/editar', methods=['GET', 'POST'])
+@login_required
+def editar_perfil():
+    form = FormEditarPerfil()
+    foto_perfil = url_for('static', filename='fotos_perfil/{}'.format(current_user.foto_perfil))
+    return render_template('editarperfil.html', foto_perfil=foto_perfil, form=form)
