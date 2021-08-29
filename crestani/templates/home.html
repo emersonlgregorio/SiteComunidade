@@ -1,8 +1,20 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="container">
-        <h1>Teste Home do projeto Web</h1>
-        <h2>Testando Render Template 2</h2>
+    <div class="container mt-3">
+        <h1 style="color: green">Blog</h1>
+        <h2>Se cadastre e interaja com outros usuários.</h2>
+        <hr>
+        {% for post in posts %}
+            <div class="row mt-4 border p-3 meupost">
+                <div class="col col-3">
+                    <div class="image me-3"> <img src="{{ post.foto_perfil }}" class="rounded-circle" width="155"> </div>
+                </div>
+                <div class="col col-9">
+                    <h3>{{ post.titulo }}</h3>
+                    <p>{{post.corpo }}</p>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

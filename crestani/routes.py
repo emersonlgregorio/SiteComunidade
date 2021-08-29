@@ -12,7 +12,8 @@ vagas = ['Auxiliar de Produção', "Mecânico de Maquinas Pesadas", 'Especialist
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    posts = Post.query.all()
+    return render_template('home.html', posts=posts)
 
 
 @app.route('/contato')
