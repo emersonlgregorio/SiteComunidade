@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import Email, DataRequired, Length, EqualTo, ValidationError
 from crestani.models import Usuario
+from flask_login import current_user
 
 
 class FormCriarConta(FlaskForm):
@@ -28,3 +29,9 @@ class FormEditarPerfil(FlaskForm):
     username = StringField('Nome de Usuário', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     botao_submit_editarperfil = SubmitField('Confirmar Edição')
+
+    def validate_email(self, email):
+        if current_user.email != email.data:
+            usuario = Usuario.query.filter_by(email=email.data).first()
+            if usuario:
+                raise ValidationError('Já existe um usuario com este e-mail. Cadastre outor e-mail.')
