@@ -7,7 +7,6 @@ import secrets
 import os
 from PIL import Image
 
-lista_usuarios = ['Emerson', 'Francieli', 'João', 'Fulano', 'Morfeu']
 vagas = ['Auxiliar de Produção', "Mecânico de Maquinas Pesadas", 'Especialista de TI', 'Auxiliar Contábil']
 
 
@@ -24,6 +23,7 @@ def contato():
 @app.route('/usuarios')
 @login_required
 def usuarios():
+    lista_usuarios = Usuario.query.all()
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
 
