@@ -2,10 +2,6 @@
 
 {% block body %}
     <div class="container mt-3">
-        <h1 style="color: green">Blog</h1>
-        <h2>Se cadastre e interaja com outros usuários.</h2>
-        <hr>
-        {% for post in posts %}
             <div class="row mt-4 border p-3 meupost">
                 <div class="col col-2">
                     <div class="image centro"> <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded-circle" width="155"> </div>
@@ -17,11 +13,10 @@
                         </div>
                 </div>
                 <div class="col col-9 ms-4">
-                    <a style="text-decoration: none" href="{{ url_for('exibir_post', post_id=post.id) }}"><h3>{{ post.titulo }}</h3></a>
+                    <h3>{{ post.titulo }}</h3>
                     <p class="datahora">{{post.data_criacao.strftime('%d/%m/%Y %H:%M')}}</p>
                     <p class="text-justify">{{post.corpo }}</p>
                 </div>
             </div>
-        {% endfor %}
     </div>
 {% endblock %}
