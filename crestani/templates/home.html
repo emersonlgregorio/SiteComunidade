@@ -8,9 +8,9 @@
         {% for post in posts %}
             <div class="row mt-4 border p-3 meupost">
                 <div class="col col-2">
-                    <div class="image me-3 d-flex justify-content-center"> <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded-circle" width="155"> </div>
-                    <strong>{{ post.autor.username }}</strong>
-                        <div class="row" style="align: center">
+                    <div class="image centro"> <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded-circle" width="155"> </div>
+                    <strong class="centro">{{ post.autor.username }}</strong>
+                        <div class="row" >
                             {% for curso in post.autor.cursos.split(';') %}
                                 <button type="button" class="badge bg-success" disabled>{{ curso }}</button>
                             {% endfor %}
