@@ -12,7 +12,7 @@ vagas = ['Auxiliar de Produção', "Mecânico de Maquinas Pesadas", 'Especialist
 
 @app.route('/')
 def home():
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.data_criacao.desc())
     return render_template('home.html', posts=posts)
 
 
