@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request, flash
+from flask import render_template, url_for, redirect, request, flash, abort
 from crestani import app, database, bcrypt
 from crestani.forms import FormCriarConta, FormLogin, FormEditarPerfil, FormCriarPost
 from crestani.models import Usuario, Post
@@ -163,3 +163,16 @@ def exibir_post(post_id):
     else:
         form = None
     return render_template('post.html', post=post, form=form)
+
+
+@app.route('/post/<post_id>/excluir', methods=['GET', 'POST'])
+@login_required
+def excluir_post(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.autor:
+        database.session.delete(post)
+        database.session.commit()
+        flash('Post excluído com sucesso', 'alert-danger')
+        return redirect(url_for('home'))
+    else:
+        abort(403)
