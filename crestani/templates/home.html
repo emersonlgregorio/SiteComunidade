@@ -18,7 +18,7 @@
                 </div>
                 <div class="col col-9 ms-4">
                     <a style="text-decoration: none" href="{{ url_for('exibir_post', post_id=post.id) }}"><h3>{{ post.titulo }}</h3></a>
-                    <p class="datahora">{{post.data_criacao.strftime('%d/%m/%Y %H:%M')}}</p>
+                    <p class="datahora">{{post.data_criacao.strftime('%d/%m/%Y %H:%M:%S')}}</p>
                     <p class="text-justify">{{post.corpo }}</p>
                 </div>
             </div>
